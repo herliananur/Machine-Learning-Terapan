@@ -36,3 +36,23 @@ Adapun penjelasan detail dari sampel data sebagai berikut:
 - region: Tempat asal
 
 ### EDA-Univariate
+Berikut merupakan EDA-Univariate Analysis:
+- Grafik sex, grafik dibawah ini menunjukkan bahwa laki-laki mendominasi.
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/grafik%20sex.png)
+
+- Grafik smoker, grafik dibawah ini menunjukkan bahwa pasien kebanyakan tidak merokok.
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/grafik%20smoker.png)
+
+- Grafik region, grafik dibawah ini menujukkan bahwa pasien kebanyakan berasal dari southeast.
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/grafik%20region.png)
+
+### EDA-Multivariate
+Berikut merupakan EDA-Multivariate Analysis:
+- Grafik rata-rata expenses relatif terhadap sex, grafik dibawah ini menunjukkan bahwa pasien laki-laki mendominasi
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/multivariate-sex.png)
+
+- Grafik rata-rata expenses relatif terhadap smoker, grafik dibawah ini menunjukkan bahwa biaya yang dikeluarkan untuk berobat lebih banyak jika pasien merokok
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/multivariate-smoker.png)
+
+- Grafik rata-rata expenses relatif terhadap region, grafik dibawah ini menunjukkan bahwa pasien terbanyak berasal dari southeast
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/multivariate-region.png)
