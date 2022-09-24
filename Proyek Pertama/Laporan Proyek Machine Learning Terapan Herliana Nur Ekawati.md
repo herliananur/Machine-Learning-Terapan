@@ -116,3 +116,76 @@ Total # of sample in test dataset: 268
 ```
 
 4. Standarisasi
+Melakukan standarisasi menggunakan StandardScaler pada data. Kemudian mengubah nilai rata-rata (mean) menjadi 0 dan nilai standar deviasi menjadi 1.
+```sh
+from sklearn.preprocessing import StandardScaler
+
+numerical_features = ['age', 'bmi', 'children']
+scaler = StandardScaler()
+scaler.fit(x_train[numerical_features])
+x_train[numerical_features] = scaler.transform(x_train.loc[:, numerical_features])
+x_train[numerical_features].head()
+```
+
+Mengecek nilai mean dan standar deviasi pada setelah proses standarisasi
+```sh
+x_train[numerical_features].describe().round(4)
+```
+
+5. Modeling
+Model-model yang digunakan padal proyek ini adalah:
+- **KNN** adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain. Algoritma KNN menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan.
+```sh
+knn = KNeighborsRegressor(n_neighbors=10)
+knn.fit(x_train, y_train)
+```
+
+- **Random forest** merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Ensemble merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama. Ide dibalik model ensemble adalah sekelompok model yang bekerja bersama menyelesaikan masalah. Sehingga, tingkat keberhasilan akan lebih tinggi dibanding model yang bekerja sendirian. 
+```sh
+RF = RandomForestRegressor(n_estimators=50, max_depth=16, random_state=55, n_jobs=-1)
+RF.fit(x_train, y_train)
+```
+
+- **Algoritma Boosting** bertujuan untuk meningkatkan performa atau akurasi prediksi. Caranya adalah dengan menggabungkan beberapa model sederhana dan dianggap lemah (weak learners) sehingga membentuk suatu model yang kuat (strong ensemble learner). Algoritma boosting muncul dari gagasan mengenai apakah algoritma yang sederhana seperti linear regression dan decision tree dapat dimodifikasi untuk dapat meningkatkan performa. 
+```sh
+boosting = AdaBoostRegressor(learning_rate=0.05, random_state=55)
+boosting.fit(x_train, y_train)
+```
+
+** | **train** | **test**|
+:-----:|:-----:|:-----:|
+**KNN** | 30064.576543 | 39220.122427|
+**RF** | 3791.412142 | 22034.478805 |
+**Boosting** | 21482.520677 | 22608.716112|
+
+Karena MSE RF lebih rendah daripada KNN dan Boosting, maka akan menggunakan model RF
+
+6. Evaluasi
+Matriks valuasi yang akan digunakan adalah MSE (Mean Squared Error) dan R2 Square
+MSE (Mean Squared Error) yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi. MSE didefinisikan dalam persamaan berikut.
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/mse.png)
+
+Berdasarkan hasil evauasi menggunakan matriks MSE, dapat disimpulkan bahwa model Random Forest memiliki MSE yang lebih kecil dibanding KNN dan Boosting.
+** | **train** | **test**|
+:-----:|:-----:|:-----:|
+**KNN** | 30064.576543 | 39220.122427|
+**RF** | 3791.412142 | 22034.478805 |
+**Boosting** | 21482.520677 | 22608.716112|
+
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/grafik%20mse.png)
+
+R2 squared merupakan angka yang berkisar antara 0 sampai 1 yang mengindikasikan besarnya kombinasi variabel independen secara bersama – sama mempengaruhi nilai variabel dependen.
+![This is an image](https://github.com/herliananur/Machine-Learning-Terapan/blob/main/Proyek%20Pertama/Gambar/r2.png)
+
+** | y_true |	prediksi_KNN | prediksi_RF | prediksi_Boosting |
+:-----:|:-----:|:-----:|:-----:|:-----:|
+992 | 10118.42 | 12328.2 | 10616.4 | 13157.5 |
+
+Dapat dilihat pada tabel bahwa prediksi menggunakan Random Forest lebih mendekati nilai y.
+
+Nilai R2 Square dari Random Forest lebih besar dari KNN dan Boosting, maka Random Forest sangat efektif dalam memprediksi nilai.
+```sh
+R2 score KNN :  0.7494154894917251
+R2 score RF :  0.8592176988797552
+R2 score Boosting :  0.7494154894917251
+```
