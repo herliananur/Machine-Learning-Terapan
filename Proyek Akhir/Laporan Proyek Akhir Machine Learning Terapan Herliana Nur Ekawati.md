@@ -45,7 +45,9 @@ Adapun penjelasan detail dari sampel data **Ratings.csv** sebagai berikut:
 
 ### Univariate Exploratory Data Analysis
 **Book**
+
 Tabel 1. Info buku
+
 ``` sh
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 271360 entries, 0 to 271359
@@ -87,7 +89,9 @@ Nama Penulis:  ['Mark P. O. Morford' 'Richard Bruce Wright' "Carlo D'Este" ...
 Terdapat 242135 buku dengan tahun terbit dan penulis yang berbeda.
 
 **Rating**
+
 Tabel 2. Info Rating
+
 ``` sh
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 1149780 entries, 0 to 1149779
@@ -153,7 +157,7 @@ rating
 ```
 Membagi data train dan test dengan komposisi 82%:18%.
 
-## Modeling
+## Modeling and Results
 
 ### Content Based Filtering
 - Modelling menggunakan fungsi TF-IDF Vectorizer. Menggunakan satu data dari book_author untuk mendapatkan rekomendasi berdasarkan penulis.
@@ -172,19 +176,24 @@ matrix([[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.]])
 ```
 - Menguji dengan judul buku Classical Mythology dengan penulis Mark P.O. Morford
+
 Tabel 3. Tampilan keterangan buku Classical Mythology
+
 **#** | **book_title** | **book_author** | **book_year** | **book_ISBN** |
 :-----:|:-----:|:-----:| :-----:| :-----:|
 0 | Classical Mythology | Mark P.O. Monford | 2002 | 0195153448 |
+
 - Mendapatkan rekomendasi yang mirip dengan buku Classical Mythology berdasarkan penulisnya
+
 Tabel 4. Rekomendasi yang mirip
+
 **#** | **book_title** | **book_author** | 
 :-----:|:-----:|:-----:| 
-0	| Fishboy: A Ghost's Story	| Mark Richard
-1	| The Diaries of Adam and Eve (Literary Classics) |	Mark Twain
-2	| Adventures of Huckleberry Finn (Signet Classic... |	Mark Twain
-3	| A Connecticut Yankee in King Arthur's Court (D...	| Mark Twain
-4	| Adventures of Huckleberry Finn	| Mark Twain
+0	| Fishboy: A Ghost's Story	| Mark Richard |
+1	| The Diaries of Adam and Eve (Literary Classics) |	Mark Twain |
+2	| Adventures of Huckleberry Finn (Signet Classic... |	Mark Twain |
+3	| A Connecticut Yankee in King Arthur's Court (D...	| Mark Twain |
+4	| Adventures of Huckleberry Finn	| Mark Twain |
 
 Berdasarkan hasil rekomendasi, sistem mengambil kata kunci Mark untuk merekomendasikan kepada user.
 
@@ -194,7 +203,9 @@ Berdasarkan hasil rekomendasi, sistem mengambil kata kunci Mark untuk merekomend
 - Mengkompile menggunakan BinaryCrossentrophy() untuk menghitung loss function, Adam sebagai oprimizer, dan RMSE sebagai metrics evaluation.
 
 Hasil rekomendasi buku sebagai berikut:
+
 Tabel 5. Hasil rekomendasi buku
+
 **Top 10 book recommendation** | 
 :-----:|
 Heart of Darkness (Wordsworth Collection) : Joseph Conrad |
