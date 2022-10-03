@@ -154,16 +154,69 @@ rating
 Membagi data train dan test dengan komposisi 82%:18%.
 
 ## Modeling
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+### Content Based Filtering
+- Modelling menggunakan fungsi TF-IDF Vectorizer. Menggunakan satu data dari book_author untuk mendapatkan rekomendasi berdasarkan penulis.
+- Lakukan fit dan transformasi kedalam bentuk matriks dengan hasil
+```sh
+(5000, 3538)
+```
+- Menghasilkan vektor tf-idf dalam bentuk matriks
+```sh
+matrix([[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]])
+```
+- Menguji dengan judul buku Classical Mythology dengan penulis Mark P.O. Morford
+Tabel 3. Tampilan keterangan buku Classical Mythology
+**#** | **book_title** | **book_author** | **book_year** | **book_ISBN** |
+:-----:|:-----:|:-----:| :-----:| :-----:|
+0 | Classical Mythology | Mark P.O. Monford | 2002 | 0195153448 |
+- Mendapatkan rekomendasi yang mirip dengan buku Classical Mythology berdasarkan penulisnya
+Tabel 4. Rekomendasi yang mirip
+**#** | **book_title** | **book_author** | 
+:-----:|:-----:|:-----:| 
+0	| Fishboy: A Ghost's Story	| Mark Richard
+1	| The Diaries of Adam and Eve (Literary Classics) |	Mark Twain
+2	| Adventures of Huckleberry Finn (Signet Classic... |	Mark Twain
+3	| A Connecticut Yankee in King Arthur's Court (D...	| Mark Twain
+4	| Adventures of Huckleberry Finn	| Mark Twain
+
+Berdasarkan hasil rekomendasi, sistem mengambil kata kunci Mark untuk merekomendasikan kepada user.
+
+### Collaborative Filtering
+- Melakukan proses encoding terhadap user id dan buku.
+- Latih dengen menggunakan kelas RecomenderNet dan melakukan proses embedding
+- Mengkompile menggunakan BinaryCrossentrophy() untuk menghitung loss function, Adam sebagai oprimizer, dan RMSE sebagai metrics evaluation.
+
+Hasil rekomendasi buku sebagai berikut:
+Tabel 5. Hasil rekomendasi buku
+**Top 10 book recommendation** | 
+:-----:|
+Heart of Darkness (Wordsworth Collection) : Joseph Conrad |
+Alice's Adventures in Wonderland and Through the Looking Glass : Lewis Carroll | 
+The Lovely Bones: A Novel : Alice Sebold |
+The Da Vinci Code : Dan Brown |
+Politically Correct Bedtime Stories: Modern Tales for Our Life and Times : James Finn Garner |
+Quidditch Through the Ages : J. K. Rowling | 
+No Pasaran! El Videojuego : Chrstine Lehmann |
+The Restaurant at the End of the Universe (Hitchhiker's Trilogy (Paperback)) : Douglas Adams |
+Q : Luther Blissett |
+La Sombra del Viento : Carlos Ruiz Zafon |
+
 
 ## Evaluation
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
-
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Pada Content Based Filtering ini menggunakan metriks Precision, yang mana merupakan metriks yang digunakan untuk mengukur berapa jumlah prediksi benar yang telah dibuat.
+Pada hasil rekomendasi Content Based, dari 5 buku yang direkomendasikan, tidak ada satu pun rekomendasi memiliki penulis yang sesuai dengan buku yang sudah dibaca oleh user. Sehingga presisi nya adalah 0%
+```sh
+Accuracy = real_author/5*100
+print("Accuracy of the model is {}%".format(Accuracy))
+```
+Output
+```sh
+Accuracy of the model is 0.0%
+```
