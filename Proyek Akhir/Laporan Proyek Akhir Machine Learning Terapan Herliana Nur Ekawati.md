@@ -21,7 +21,7 @@ Berdasarkan permasalahan di atas, tujuan dari proyek ini yaitu:
 - Mengetahui cara untuk membuat sistem rekomendasi buku berdasarkan rating buku
 
 ### Solution statements
-Proyek ini akan menggunakan 2 algoritma Machine Learning yaitu:
+Proyek ini akan menggunakan 2 algoritma *Machine Learning* yaitu:
 1. **Content Based Filtering** adalah bagian untuk merekomendasikan item yang mirip dengan masa lalu. Contohnya jika membaca buku dengan genre horor, maka algoritma ini akan merekomendasikan buku genre horor dengan judul buku yang berbeda.
 2. **Collaborative Filtering** bergantung pada pendapat komunitas pengguna. Ia tidak memerlukan atribut untuk setiap itemnya seperti pada sistem berbasis konten.
 
@@ -70,13 +70,6 @@ memory usage: 16.6+ MB
 Berdasarkan tabel diatas, book memiliki 271360 data entri. Terdapat 8 variabel berupa ISBN, Book-Title, Book-Author, Year-of-Publication, Publisher, Image-URL-S, Image-URL-M, dan Image-URL-L.
 
 ```sh
-print('Banyak buku: ', len(book.book_title.unique()))
-print('Banyak penulis: ', len(book.book_author.unique()))
-print('Judul Buku: ', book.book_title.unique())
-print('Nama Penulis: ', book.book_author.unique())
-```
-Output
-```sh
 Banyak buku:  242135
 Banyak penulis:  102024
 Judul Buku:  ['Classical Mythology' 'Clara Callan' 'Decision in Normandy' ...
@@ -109,11 +102,6 @@ memory usage: 26.3+ MB
 Berdasarkan tabel diatas, book memiliki 1149780 data entri. Terdapat 3 variabel berupa User-ID, ISBN, dan Book-Rating.
 
 ```sh
-print('Angka rating: ', rating.book_rating.unique())
-print('Banyak user: ', len(rating.userid.unique()))
-```
-Output
-```sh
 Angka rating:  [ 0  5  3  6  8  7 10  9  4  1  2]
 Banyak user:  105283
 ```
@@ -143,19 +131,9 @@ encoded ISBN :  {'034545104X': 0, '0155061224': 1, '0446520802': 2, '052165615X'
 encoded angka ke ISBN:  {0: '034545104X', 1: '0155061224', 2: '0446520802', 3: '052165615X', 4: . . .
 ```
 
-- Mapping
-```sh
-rating['user'] = rating['userid'].map(user_to_user_encoded)
-rating['book'] = rating['ISBN'].map(book_to_book_encoded)
-```
-Memetakan userid dan ISBN ke dataframe yang berhubungan.
+- Mapping, Memetakan userid dan ISBN ke dataframe yang berhubungan.
 - Cek data, untuk mengecek jumlah dari user, buku, dan mengubah nilai rating menjadi float.
-- Melatih data, dengan mengacak data terlebih dahulu
-```sh
-rating = rating.sample(frac=1, random_state=42)
-rating
-```
-Membagi data train dan test dengan komposisi 82%:18%.
+- Melatih data, dengan mengacak data terlebih dahulu. Membagi data train dan test dengan komposisi 82%:18%.
 
 ## Modeling and Results
 
@@ -221,8 +199,8 @@ La Sombra del Viento : Carlos Ruiz Zafon |
 
 
 ## Evaluation
-Pada Content Based Filtering ini menggunakan metriks Precision, yang mana merupakan metriks yang digunakan untuk mengukur berapa jumlah prediksi benar yang telah dibuat.
-Pada hasil rekomendasi Content Based, dari 5 buku yang direkomendasikan, tidak ada satu pun rekomendasi memiliki penulis yang sesuai dengan buku yang sudah dibaca oleh user. Sehingga presisi nya adalah 0%
+Pada **Content Based Filtering** ini menggunakan metriks Precision, yang mana merupakan metriks yang digunakan untuk mengukur berapa jumlah prediksi benar yang telah dibuat.
+Pada hasil rekomendasi Content Based Filtering, dari 5 buku yang direkomendasikan, tidak ada satu pun rekomendasi memiliki penulis yang sesuai dengan buku yang sudah dibaca oleh user. Sehingga presisi nya adalah 0%
 ```sh
 Accuracy = real_author/5*100
 print("Accuracy of the model is {}%".format(Accuracy))
@@ -231,3 +209,13 @@ Output
 ```sh
 Accuracy of the model is 0.0%
 ```
+
+Pada **Collaborative Filtering** ini menggunakan metriks RMSE, yang mana besar kesalahan hasil prediksi, dimana semakin kecil (mendekati 0), maka  nilai RMSE hasil prediksi akan semakin akurat.
+
+Berikut hasil nilai RMSE pada Collaborative Filtering
+
+![download](https://user-images.githubusercontent.com/111114060/193612621-a1eb3116-6426-4179-aa3a-9d7f0fbf2bcb.png)
+
+Gambar 1. Nilai RMSE pada Collaborative Filtering
+
+Kesimpulan yang bisa diambil yaitu nilai train dan test mengalami penurunan, yang berarti model yang telah dibuat cukup akurat.
