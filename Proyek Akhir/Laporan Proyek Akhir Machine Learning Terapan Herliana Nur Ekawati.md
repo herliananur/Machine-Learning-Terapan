@@ -153,6 +153,23 @@ matrix([[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.]])
 ```
+
+- Menghitung derajat kesamaan menggunakan Cosine  Similarity
+```sh
+array([[1., 0., 0., ..., 0., 0., 0.],
+       [0., 1., 0., ..., 0., 0., 0.],
+       [0., 0., 1., ..., 0., 0., 0.],
+       ...,
+       [0., 0., 0., ..., 1., 0., 0.],
+       [0., 0., 0., ..., 0., 1., 0.],
+       [0., 0., 0., ..., 0., 0., 1.]])
+```
+
+- Melihat matriks kesamaan dengan sampel buku 10 dan 20
+```sh
+Shape: (5000, 5000)
+```
+
 - Menguji dengan judul buku Classical Mythology dengan penulis Mark P.O. Morford
 
 Tabel 3. Tampilan keterangan buku Classical Mythology
@@ -178,7 +195,7 @@ Berdasarkan hasil rekomendasi, sistem mengambil kata kunci Mark untuk merekomend
 ### Collaborative Filtering
 - Melakukan proses encoding terhadap user id dan buku.
 - Latih dengen menggunakan kelas RecomenderNet dan melakukan proses embedding
-- Mengkompile menggunakan BinaryCrossentrophy() untuk menghitung loss function, Adam sebagai oprimizer, dan RMSE sebagai metrics evaluation.
+- Mengkompile menggunakan BinaryCrossentrophy() untuk menghitung loss function, Adam sebagai optimizer, dan RMSE sebagai metrics evaluation.
 
 Hasil rekomendasi buku sebagai berikut:
 
@@ -218,4 +235,4 @@ Berikut hasil nilai RMSE pada Collaborative Filtering
 
 Gambar 1. Nilai RMSE pada Collaborative Filtering
 
-Kesimpulan yang bisa diambil yaitu nilai train dan test mengalami penurunan, yang berarti model yang telah dibuat cukup akurat.
+Kesimpulan yang bisa diambil dari plot nilai RMSE yaitu nilai train dan test mengalami penurunan, yang berarti model yang telah dibuat cukup akurat.
